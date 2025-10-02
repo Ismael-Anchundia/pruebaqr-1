@@ -71,9 +71,10 @@
       btn.style.display = "none";
       videoContainer.style.display = "block";
 
-      // Activar audio y reproducir
+      // Forzar reproducción con audio
       vid.muted = false;
       vid.volume = 1;
+      vid.currentTime = 0;
       vid.play().catch(() => {
         console.log("Reproducción bloqueada, requiere interacción del usuario");
       });
@@ -87,6 +88,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
