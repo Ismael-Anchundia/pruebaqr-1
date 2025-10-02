@@ -47,7 +47,7 @@
     video {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* ajusta el video a pantalla completa */
+      object-fit: cover;
     }
   </style>
 </head>
@@ -55,7 +55,7 @@
   <div id="container">
     <button id="trustBtn">Dale, presiona el boton :3</button>
     <div id="video">
-      <video id="rickVideo" muted playsinline style="width:100%; height:100%; object-fit:cover;">
+      <video id="rickVideo" playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="rickroll.mp4" type="video/mp4">
         Tu navegador no soporta el video 😔
       </video>
@@ -71,7 +71,9 @@
       btn.style.display = "none";
       videoContainer.style.display = "block";
 
-      // Forzar reproducción en móviles
+      // Activar audio y reproducir
+      vid.muted = false;
+      vid.volume = 1;
       vid.play().catch(() => {
         console.log("Reproducción bloqueada, requiere interacción del usuario");
       });
@@ -85,6 +87,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
