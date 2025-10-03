@@ -9,6 +9,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      /* Fondo degradado en lugar de negro */
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       color: white;
       display: flex;
@@ -59,7 +60,7 @@
 
     /* Botones de volver fijos */
     .backBtn {
-      position: fixed; /* ahora siempre sobre todo */
+      position: fixed; /* siempre sobre todo */
       top: 15px;
       left: 15px;
       z-index: 999; /* encima de video/modelo */
@@ -68,7 +69,7 @@
       padding: 10px 20px;
       border-radius: 6px;
       cursor: pointer;
-      display: none; /* los mostramos solo cuando toca */
+      display: none; /* se muestran solo cuando corresponde */
     }
 
     /* Modelo 3D */
@@ -156,6 +157,8 @@
 
 </body>
 </html>
+
+
 
 
 
