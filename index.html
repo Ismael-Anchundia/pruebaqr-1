@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Omla :D</title>
+  <title>Mi Proyecto Interactivo</title>
   <style>
     body {
       margin: 0;
@@ -16,15 +16,24 @@
       font-family: Arial, sans-serif;
     }
 
-    #container {
+    #menu, #rickroll, #entorno3d {
       text-align: center;
       width: 100%;
       height: 100%;
+      display: none;
     }
 
-    #trustBtn {
-      padding: 20px 40px;
-      font-size: 24px;
+    #menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
       border: none;
       border-radius: 12px;
       background: #ff4081;
@@ -33,61 +42,100 @@
       transition: transform 0.2s, background 0.3s;
     }
 
-    #trustBtn:hover {
+    button:hover {
       transform: scale(1.1);
       background: #f50057;
     }
 
-    #video {
-      display: none;
+    video, model-viewer {
       width: 100%;
       height: 100%;
+      border: none;
+      object-fit: cover;
     }
 
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .backBtn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #222;
+      color: white;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <button id="trustBtn">Dale, presiona el boton :3</button>
-    <div id="video">
-      <video id="rickVideo" playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="rickroll.mp4" type="video/mp4">
-        Tu navegador no soporta el video 😔
-      </video>
-    </div>
+
+  <!-- Menú principal -->
+  <div id="menu">
+    <button id="btnRick">🎵 RickRoll</button>
+    <button id="btnEntorno">🌌 Entorno 3D</button>
   </div>
 
+  <!-- RickRoll -->
+  <div id="rickroll">
+    <button class="backBtn" onclick="volverAlMenu()">⬅ Volver</button>
+    <video id="rickVideo" playsinline>
+      <source src="rickroll.mp4" type="video/mp4">
+      Tu navegador no soporta el video 😔
+    </video>
+  </div>
+
+  <!-- Entorno 3D -->
+  <div id="entorno3d">
+    <button class="backBtn" onclick="volverAlMenu()">⬅ Volver</button>
+    <model-viewer 
+      src="entorno.glb" 
+      alt="Mi entorno 3D" 
+      auto-rotate 
+      camera-controls 
+      style="width:100%; height:100vh;">
+    </model-viewer>
+  </div>
+
+  <!-- Script de model-viewer -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
   <script>
-    const btn = document.getElementById("trustBtn");
-    const videoContainer = document.getElementById("video");
+    const menu = document.getElementById("menu");
+    const rickroll = document.getElementById("rickroll");
+    const entorno3d = document.getElementById("entorno3d");
     const vid = document.getElementById("rickVideo");
 
-    btn.addEventListener("click", () => {
-      btn.style.display = "none";
-      videoContainer.style.display = "block";
-
-      // Forzar reproducción con audio
+    // Botón RickRoll
+    document.getElementById("btnRick").addEventListener("click", () => {
+      menu.style.display = "none";
+      rickroll.style.display = "block";
       vid.muted = false;
       vid.volume = 1;
       vid.currentTime = 0;
-      vid.play().catch(() => {
-        console.log("Reproducción bloqueada, requiere interacción del usuario");
-      });
-
-      // Loop seguro
-      vid.addEventListener('ended', () => {
+      vid.play();
+      vid.addEventListener("ended", () => {
         vid.currentTime = 0;
         vid.play();
       });
     });
+
+    // Botón Entorno 3D
+    document.getElementById("btnEntorno").addEventListener("click", () => {
+      menu.style.display = "none";
+      entorno3d.style.display = "block";
+    });
+
+    // Volver al menú
+    function volverAlMenu() {
+      rickroll.style.display = "none";
+      entorno3d.style.display = "none";
+      menu.style.display = "flex";
+      vid.pause();
+    }
   </script>
 </body>
 </html>
+
+
 
 
 
