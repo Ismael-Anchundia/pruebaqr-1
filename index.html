@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rickroll + Entorno 3D</title>
+  <title>Chimuelo Bailando + Entorno 3D</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      /* Fondo degradado en lugar de negro */
+      /* Fondo degradado para el menú inicial */
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       color: white;
       display: flex;
@@ -41,18 +41,18 @@
     }
 
     /* Contenedores de pantalla completa */
-    #rickroll, #entorno3d {
+    #chimuelo, #entorno3d {
       display: none;
       width: 100%;
       height: 100%;
       position: fixed;
       top: 0;
       left: 0;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background: black; /* se puede cambiar o quitar si quieres */
     }
 
     /* Video */
-    #rickroll video {
+    #chimuelo video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -60,16 +60,16 @@
 
     /* Botones de volver fijos */
     .backBtn {
-      position: fixed; /* siempre sobre todo */
+      position: fixed; 
       top: 15px;
       left: 15px;
-      z-index: 999; /* encima de video/modelo */
+      z-index: 999;
       background: #444;
       color: white;
       padding: 10px 20px;
       border-radius: 6px;
       cursor: pointer;
-      display: none; /* se muestran solo cuando corresponde */
+      display: none;
     }
 
     /* Modelo 3D */
@@ -85,18 +85,18 @@
 
   <!-- Menú principal -->
   <div id="menu">
-    <button id="btnRickroll" class="menuBtn">🎵 Reproducir Rickroll</button>
+    <button id="btnChimuelo" class="menuBtn">🎵 Ver Chimuelo bailando</button>
     <button id="btnEntorno" class="menuBtn">🌍 Entorno 3D</button>
   </div>
 
   <!-- Botones de volver fijos -->
-  <button id="btnVolverRick" class="backBtn">⬅ Volver</button>
+  <button id="btnVolverChimuelo" class="backBtn">⬅ Volver</button>
   <button id="btnVolverEntorno" class="backBtn">⬅ Volver</button>
 
-  <!-- RickRoll -->
-  <div id="rickroll">
-    <video id="rickVideo" playsinline>
-      <source src="rickroll.mp4" type="video/mp4">
+  <!-- Video de Chimuelo -->
+  <div id="chimuelo">
+    <video id="chimueloVideo" playsinline>
+      <source src="Chimuelo_bailando.mp4" type="video/mp4">
       Tu navegador no soporta el video 😔
     </video>
   </div>
@@ -113,18 +113,18 @@
 
   <script>
     const menu = document.getElementById("menu");
-    const rickroll = document.getElementById("rickroll");
+    const chimuelo = document.getElementById("chimuelo");
     const entorno3d = document.getElementById("entorno3d");
-    const vid = document.getElementById("rickVideo");
+    const vid = document.getElementById("chimueloVideo");
 
-    const btnVolverRick = document.getElementById("btnVolverRick");
+    const btnVolverChimuelo = document.getElementById("btnVolverChimuelo");
     const btnVolverEntorno = document.getElementById("btnVolverEntorno");
 
-    // Abrir RickRoll
-    document.getElementById("btnRickroll").addEventListener("click", () => {
+    // Abrir video Chimuelo
+    document.getElementById("btnChimuelo").addEventListener("click", () => {
       menu.style.display = "none";
-      rickroll.style.display = "block";
-      btnVolverRick.style.display = "block";
+      chimuelo.style.display = "block";
+      btnVolverChimuelo.style.display = "block";
       vid.muted = false;
       vid.volume = 1;
       vid.currentTime = 0;
@@ -138,13 +138,13 @@
       btnVolverEntorno.style.display = "block";
     });
 
-    // Volver desde RickRoll
-    btnVolverRick.addEventListener("click", () => {
-      rickroll.style.display = "none";
+    // Volver desde video Chimuelo
+    btnVolverChimuelo.addEventListener("click", () => {
+      chimuelo.style.display = "none";
       menu.style.display = "flex";
       vid.pause();
       vid.currentTime = 0;
-      btnVolverRick.style.display = "none";
+      btnVolverChimuelo.style.display = "none";
     });
 
     // Volver desde Entorno 3D
@@ -157,6 +157,8 @@
 
 </body>
 </html>
+
+
 
 
 
