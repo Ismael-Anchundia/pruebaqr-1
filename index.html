@@ -24,7 +24,7 @@
       gap: 15px;
     }
 
-    button {
+    button.menuBtn {
       padding: 15px 25px;
       font-size: 18px;
       cursor: pointer;
@@ -35,7 +35,7 @@
       transition: 0.3s;
     }
 
-    button:hover {
+    button.menuBtn:hover {
       background: #cc0000;
     }
 
@@ -57,17 +57,18 @@
       object-fit: cover;
     }
 
-    /* Botón de volver siempre encima */
+    /* Botones de volver fijos */
     .backBtn {
-      position: absolute;
+      position: fixed; /* ahora siempre sobre todo */
       top: 15px;
       left: 15px;
-      z-index: 10; /* importante */
+      z-index: 999; /* encima de video/modelo */
       background: #444;
-      font-size: 16px;
+      color: white;
       padding: 10px 20px;
       border-radius: 6px;
       cursor: pointer;
+      display: none; /* los mostramos solo cuando toca */
     }
 
     /* Modelo 3D */
@@ -83,13 +84,16 @@
 
   <!-- Menú principal -->
   <div id="menu">
-    <button id="btnRickroll">🎵 Reproducir Rickroll</button>
-    <button id="btnEntorno">🌍 Entorno 3D</button>
+    <button id="btnRickroll" class="menuBtn">🎵 Reproducir Rickroll</button>
+    <button id="btnEntorno" class="menuBtn">🌍 Entorno 3D</button>
   </div>
 
+  <!-- Botones de volver fijos -->
+  <button id="btnVolverRick" class="backBtn">⬅ Volver</button>
+  <button id="btnVolverEntorno" class="backBtn">⬅ Volver</button>
+
   <!-- RickRoll -->
-  <div id="rickroll" style="position: relative;">
-    <button id="btnVolverRick" class="backBtn">⬅ Volver</button>
+  <div id="rickroll">
     <video id="rickVideo" playsinline>
       <source src="rickroll.mp4" type="video/mp4">
       Tu navegador no soporta el video 😔
@@ -97,8 +101,7 @@
   </div>
 
   <!-- Entorno 3D -->
-  <div id="entorno3d" style="position: relative;">
-    <button id="btnVolverEntorno" class="backBtn">⬅ Volver</button>
+  <div id="entorno3d">
     <model-viewer 
       src="bosque_diorama.glb" 
       alt="Entorno 3D - Bosque Diorama" 
@@ -113,10 +116,14 @@
     const entorno3d = document.getElementById("entorno3d");
     const vid = document.getElementById("rickVideo");
 
+    const btnVolverRick = document.getElementById("btnVolverRick");
+    const btnVolverEntorno = document.getElementById("btnVolverEntorno");
+
     // Abrir RickRoll
     document.getElementById("btnRickroll").addEventListener("click", () => {
       menu.style.display = "none";
       rickroll.style.display = "block";
+      btnVolverRick.style.display = "block";
       vid.muted = false;
       vid.volume = 1;
       vid.currentTime = 0;
@@ -127,25 +134,29 @@
     document.getElementById("btnEntorno").addEventListener("click", () => {
       menu.style.display = "none";
       entorno3d.style.display = "block";
+      btnVolverEntorno.style.display = "block";
     });
 
     // Volver desde RickRoll
-    document.getElementById("btnVolverRick").addEventListener("click", () => {
+    btnVolverRick.addEventListener("click", () => {
       rickroll.style.display = "none";
       menu.style.display = "flex";
       vid.pause();
       vid.currentTime = 0;
+      btnVolverRick.style.display = "none";
     });
 
     // Volver desde Entorno 3D
-    document.getElementById("btnVolverEntorno").addEventListener("click", () => {
+    btnVolverEntorno.addEventListener("click", () => {
       entorno3d.style.display = "none";
       menu.style.display = "flex";
+      btnVolverEntorno.style.display = "none";
     });
   </script>
 
 </body>
 </html>
+
 
 
 
