@@ -16,11 +16,14 @@
       align-items: center;
       height: 100vh;
     }
+
+    /* Menú principal */
     #menu {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
+
     button {
       padding: 15px 25px;
       font-size: 18px;
@@ -31,9 +34,12 @@
       color: white;
       transition: 0.3s;
     }
+
     button:hover {
       background: #cc0000;
     }
+
+    /* Contenedores de pantalla completa */
     #rickroll, #entorno3d {
       display: none;
       width: 100%;
@@ -43,19 +49,34 @@
       left: 0;
       background: black;
     }
-    video {
+
+    /* Video */
+    #rickroll video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
+    /* Botón de volver siempre encima */
     .backBtn {
       position: absolute;
       top: 15px;
       left: 15px;
+      z-index: 10; /* importante */
       background: #444;
       font-size: 16px;
       padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
     }
+
+    /* Modelo 3D */
+    model-viewer {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
   </style>
 </head>
 <body>
@@ -67,7 +88,7 @@
   </div>
 
   <!-- RickRoll -->
-  <div id="rickroll">
+  <div id="rickroll" style="position: relative;">
     <button id="btnVolverRick" class="backBtn">⬅ Volver</button>
     <video id="rickVideo" playsinline>
       <source src="rickroll.mp4" type="video/mp4">
@@ -76,14 +97,13 @@
   </div>
 
   <!-- Entorno 3D -->
-  <div id="entorno3d">
+  <div id="entorno3d" style="position: relative;">
     <button id="btnVolverEntorno" class="backBtn">⬅ Volver</button>
     <model-viewer 
       src="bosque_diorama.glb" 
-      alt="Mi entorno 3D" 
+      alt="Entorno 3D - Bosque Diorama" 
       auto-rotate 
-      camera-controls 
-      style="width:100%; height:100vh;">
+      camera-controls>
     </model-viewer>
   </div>
 
@@ -98,7 +118,8 @@
       menu.style.display = "none";
       rickroll.style.display = "block";
       vid.muted = false;
-      vid.currentTime = 0; // empieza desde el inicio
+      vid.volume = 1;
+      vid.currentTime = 0;
       vid.play();
     });
 
@@ -113,7 +134,7 @@
       rickroll.style.display = "none";
       menu.style.display = "flex";
       vid.pause();
-      vid.currentTime = 0; // reinicia el video
+      vid.currentTime = 0;
     });
 
     // Volver desde Entorno 3D
@@ -125,6 +146,8 @@
 
 </body>
 </html>
+
+
 
 
 
