@@ -55,7 +55,8 @@
     #chimuelo video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* Mostrar todo el video sin recortes */
+      background: black; /* Relleno de bordes si no coincide la proporción */
     }
 
     /* Botones de volver fijos */
@@ -157,6 +158,8 @@
 
 </body>
 </html>
+
+
 
 
 
